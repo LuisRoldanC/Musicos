@@ -1,4 +1,4 @@
-﻿class Musico
+﻿abstract class Musico //La clase abtracta solo puede generar soluciones
 {
     public string Nombre {get; set;}
     
@@ -13,10 +13,8 @@
     {
     Console.WriteLine($"Hola soy {Nombre}");
     }
-    public virtual void Tocar()
-    {
-    Console.WriteLine($"{Nombre} esta tocando su instrumento");
-    }
+    public /*virtual*/ abstract void Tocar();//Console.WriteLine($"{Nombre} esta tocando su instrumento");
+    //Los metodos abstractos no tienen implementacion, deben estar en clase del mismo tipop astracto
 }
 class Baterista: Musico
 {
@@ -28,7 +26,7 @@ public Baterista (string n, string b):base (n)
     Bateria=b;
 }
     //Metodo
-    public override void Tocar()
+    public override /*new*/ void Tocar()
     {
         Console.WriteLine($"{Nombre} esta tocando bateria");
     }
@@ -43,7 +41,7 @@ class Bajista: Musico
     }
 
     //Metodo
-    public override void Tocar()
+    public override /*new*/ void Tocar()
     {
         Console.WriteLine($"{Nombre} esta tocando su bajo");
     }
@@ -53,7 +51,9 @@ class Program
     private static void Main(string[] args)
     {
 
-    List<Musico> SickAndTired = new List<Musico>();
+    List<Musico> SickAndTired = new List<Musico>(); //Con la clase abstracta solo se pueded crear referencias de tipo musico
+
+
     SickAndTired.Add(new Bajista("Adri","Yamaha"));
     SickAndTired.Add(new Baterista("Ian","Pearl"));
 
