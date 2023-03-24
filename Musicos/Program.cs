@@ -9,11 +9,11 @@
     }
 
     //Metodos
-    public void Saluda ()
-    {
-    Console.WriteLine($"Hola soy {Nombre}");
-    }
+     public virtual void Saludar() => Console.WriteLine(GetSaludo()); //refactorizando el saludo para reutilizar.
+    public virtual string GetSaludo () =>" Hola,soy " + Nombre;
+    public virtual void Saludo() => Console.WriteLine("Hola soy (GetSaludo())");
     public /*virtual*/ abstract void Tocar();//Console.WriteLine($"{Nombre} esta tocando su instrumento");
+    
     //Los metodos abstractos no tienen implementacion, deben estar en clase del mismo tipop astracto
 }
 class Baterista: Musico
@@ -30,6 +30,9 @@ public Baterista (string n, string b):base (n)
     {
         Console.WriteLine($"{Nombre} esta tocando bateria");
     }
+    public override string GetSaludo() => base.GetSaludo() + " y soy baterista";
+    public override void Saludo() => Console.WriteLine(GetSaludo());
+   
 }
 class Bajista: Musico
 {
@@ -45,6 +48,8 @@ class Bajista: Musico
     {
         Console.WriteLine($"{Nombre} esta tocando su bajo");
     }
+    public override string GetSaludo() => base.GetSaludo() + " y soy bajista";
+    public override void Saludo() => Console.WriteLine(GetSaludo());
 }
 class Program
 {
@@ -59,7 +64,7 @@ class Program
 
     foreach (var Musico in SickAndTired)
     {
-        Musico.Saluda();
+        Musico.Saludar();
     }
     foreach (var Musico in SickAndTired)
     {
@@ -78,5 +83,7 @@ class Program
     Adri.Tocar();
     Adri.Saluda();
 */
+
+//Polimorfismo: Los objetos pueden cambiar su comportamiento dependiendo
     }
 }
